@@ -1,0 +1,22 @@
+<form method="post" action="create_new_user">
+  <br>
+  <%= token_tag %>
+  <strong>Email</strong><br>
+  <input type="text" name="email"><br>
+  <strong>Contraseña</strong><br>
+  <input type="password" name="password"><br>
+  <strong>Confirmar contraseña</strong><br>
+  <input type="password" name="password_confirmation"><br>
+  <strong>Celular</strong><br>
+  <input type="number" name="celular"><br>
+  <strong>Rol</strong><br>
+  <select name="rol">
+    <option value="1">Administrador</option>
+    <option value="2">Proveedor</option>
+    <option value="3">Restaurante</option>
+    <option value="4">Operario</option>
+  </select><br>
+
+  <input type="submit"><br>
+
+</form>

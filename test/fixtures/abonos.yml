@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proveedor_id: 
+  pedido_id: 
+  monto: 1.5
+  comentario: MyText
+  user_id: 
+
+two:
+  proveedor_id: 
+  pedido_id: 
+  monto: 1.5
+  comentario: MyText
+  user_id: 

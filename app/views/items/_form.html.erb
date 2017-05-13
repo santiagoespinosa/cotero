@@ -1,0 +1,25 @@
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <strong><%= f.label :nombre %></strong><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :Categoria %></strong><br>
+    <%= f.select :categorium_id, options_for_select(@categorias.map{ |c| [c.nombre, c.id, {'data-id'=>c.id}] }) %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Crear item"%>
+  </div>
+<% end %>

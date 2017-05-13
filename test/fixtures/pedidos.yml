@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pedido_hash: MyString
+  estado_actual: 1
+  restaurante_id: 
+  fechahora_solicitada: 2017-03-05 20:35:25
+  fechahora_estimada: 2017-03-05 20:35:25
+  fee: 1.5
+
+two:
+  pedido_hash: MyString
+  estado_actual: 1
+  restaurante_id: 
+  fechahora_solicitada: 2017-03-05 20:35:25
+  fechahora_estimada: 2017-03-05 20:35:25
+  fee: 1.5

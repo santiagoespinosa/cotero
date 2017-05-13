@@ -1,0 +1,37 @@
+<%= form_for(@listum) do |f| %>
+  <% if @listum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@listum.errors.count, "error") %> prohibited this listum from being saved:</h2>
+
+      <ul>
+      <% @listum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <strong><%= f.label :Nombre %></strong><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :Restaurante %></strong><br>
+    <%#= f.select :restaurante_id, options_for_select(@restaurantes.map{ |c| [c.nombre, c.id, {'data-id'=>c.id}] },(@listum.restaurante_id)) %>
+
+    <% if current_user.rol == RESTAURANTE %>
+        <%= Restaurante.find_by_user_id(current_user.id).nombre %>
+        <% elsif current_user.rol == ADMIN %>
+    <%= f.select :restaurante_id, options_for_select(@restaurantes.map{ |c| [c.nombre, c.id, {'data-id'=>c.id}] },(@listum.restaurante_id)) %>
+        <% end %>
+
+
+  </div>
+
+    <% @items.each do |anitem| %>
+        <input type="checkbox" name="listum_items[<%= anitem.id %>]"> <strong><%= anitem.categorium.nombre %> </strong>- <%= anitem.nombre %><br>
+    <% end %>
+  <div class="actions">
+    <%= f.submit "Crear lista"%>
+  </div>
+<% end %>

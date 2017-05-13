@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  valor: 1.5
+  disponible: false
+  proveedor_id: 
+  cantidad: 1
+  item_id: 
+  estado_actual: 1
+
+two:
+  nombre: MyString
+  valor: 1.5
+  disponible: false
+  proveedor_id: 
+  cantidad: 1
+  item_id: 
+  estado_actual: 1

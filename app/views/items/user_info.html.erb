@@ -1,0 +1,21 @@
+<h1>Perfil</h1>
+
+<% if user_signed_in?
+role = current_user.rol
+%>
+
+<table style="width:75%" border = "1">
+  <tr>
+    <th>Email</th>
+    <th>Celular</th>
+    <th>Rol</th>
+    <th>Último ingreso</th>
+  </tr>
+  <tr>
+    <td><%= current_user.email %></td>
+    <td><%= current_user.celular %></td>
+    <td><%= role == RESTAURANTE ? 'Restaurante' : (role == ADMIN ? 'Administrador' : 'Proveedor') %></td>
+    <td><%= current_user.last_sign_in_at %></td>
+  </tr>
+</table>
+<% end %>

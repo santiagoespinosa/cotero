@@ -1,0 +1,25 @@
+<%= form_for(@categorium) do |f| %>
+  <% if @categorium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@categorium.errors.count, "error") %> prohibited this categorium from being saved:</h2>
+
+      <ul>
+      <% @categorium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <strong><%= f.label :Nombre %></strong><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :proveedor_id %></strong><br>
+    <%= f.select :proveedor_id, options_for_select(@proveedors.map{ |c| [c.nombre, c.id, {'data-id'=>c.id}] },(@categorium.proveedor_id)) %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Crear categoría"%>
+  </div>
+<% end %>

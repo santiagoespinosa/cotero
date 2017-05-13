@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Items</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Categoría</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.nombre %></td>
+        <td><%= item.categorium.nombre %></td>
+        <td><%= link_to 'Ver', item %></td>
+        <% if current_user.rol == ADMIN %><td><%= link_to 'Editar', edit_item_path(item) %></td><% end %>
+        <% if current_user.rol == ADMIN %><td><%= link_to 'Eliminar', item, method: :delete, data: { confirm: 'Are you sure?' } %></td><% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user.rol == ADMIN %>
+    <button type="button"><%= link_to 'Nuevo Item', new_item_path %></button>
+
+<% end %>

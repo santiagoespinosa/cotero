@@ -1,0 +1,29 @@
+<%= form_for(@item_proveedor) do |f| %>
+  <% if @item_proveedor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item_proveedor.errors.count, "error") %> prohibited this item_proveedor from being saved:</h2>
+
+      <ul>
+      <% @item_proveedor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <strong><%= f.label :item_id %></strong><br>
+    <%= f.select :item_id, options_for_select(@items.map{ |c| [c.nombre, c.id, {'data-id'=>c.id}] },(@item_proveedor.item_id)) %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :proveedor_id %></strong><br>
+    <%= f.select :proveedor_id, options_for_select(@proveedors.map{ |c| [c.nombre, c.id, {'data-id'=>c.id}] },(@item_proveedor.proveedor_id)) %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :precio %></strong><br>
+    <%= f.text_field :precio %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Crear proveedor de items"%>
+  </div>
+<% end %>

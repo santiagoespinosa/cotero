@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Item Lista</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Listum</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_lista.each do |item_listum| %>
+      <tr>
+        <td><%= item_listum.item.nombre %></td>
+        <td><%= item_listum.listum.nombre %></td>
+        <td><%= link_to 'Show', item_listum %></td>
+        <td><%= link_to 'Edit', edit_item_listum_path(item_listum) %></td>
+        <td><%= link_to 'Destroy', item_listum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item listum', new_item_listum_path %>

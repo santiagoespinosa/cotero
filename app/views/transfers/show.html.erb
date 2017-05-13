@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @transfer.memo %>
+</p>
+
+<p>
+  <strong>Pedido:</strong>
+  <%= @transfer.pedido %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @transfer.from_id %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @transfer.to_id %>
+</p>
+
+<%= link_to 'Edit', edit_transfer_path(@transfer) %> |
+<%= link_to 'Back', transfers_path %>

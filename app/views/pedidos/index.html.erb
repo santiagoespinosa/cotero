@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pedidos</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Identificador</th>
+      <th>Estado actual</th>
+      <th>Restaurante</th>
+      <th>Fecha y hora salida</th>
+      <th>Fecha y hora estimada</th>
+      <th>Tarifa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pedidos.each do |pedido| %>
+      <tr>
+        <td><%= pedido.pedido_hash %></td>
+        <td><%= pedido.estado_actual == PEDIDO_SOLICITADO ? 'Solicitado' : (pedido.estado_actual == PEDIDO_ACEPTADO ? 'Aceptado' :
+                (pedido.estado_actual == PEDIDO_RECOGIDO ? 'Recogido' : (pedido.estado_actual == PEDIDO_RECHAZADO ? 'Rechazado' :
+                (pedido.estado_actual == PEDIDO_ENTREGADO ? 'Entregado': 'Pagado' )))) %></td>
+        <td><%= pedido.restaurante.nombre %></td>
+        <td><%= pedido.fechahora_solicitada %></td>
+        <td><%= pedido.fechahora_estimada %></td>
+        <td><%= pedido.fee %></td>
+        <td><%= link_to 'Ver', pedido %></td>
+        <% if current_user.rol == ADMIN || current_user.rol == OPERARIO %>
+            <td><%= link_to 'Editar', edit_pedido_path(pedido) %></td> <% end %>
+        <td><%= link_to 'Eliminar', pedido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

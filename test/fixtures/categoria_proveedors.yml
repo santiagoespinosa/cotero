@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proveedor_id: 
+  categorium_id: 
+
+two:
+  proveedor_id: 
+  categorium_id: 

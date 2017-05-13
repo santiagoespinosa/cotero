@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @item_pedido.nombre %>
+</p>
+
+<p>
+  <strong>Valor:</strong>
+  <%= @item_pedido.valor %>
+</p>
+
+<p>
+  <strong>Disponible:</strong>
+  <%= @item_pedido.disponible %>
+</p>
+
+<p>
+  <strong>Proveedor:</strong>
+  <%= @item_pedido.proveedor.nombre %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @item_pedido.cantidad %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @item_pedido.item.nombre %>
+</p>
+
+<p>
+  <strong>Estado actual:</strong>
+  <%= @item_pedido.estado_actual == PEDIDO_SOLICITADO ? 'Solicitado' : (@item_pedido.estado_actual == PEDIDO_ACEPTADO ? 'Aceptado' :
+          (@item_pedido.estado_actual == PEDIDO_RECOGIDO ? 'Recogido' : (@item_pedido.estado_actual == PEDIDO_RECHAZADO ? 'Rechazado' :
+          (@item_pedido.estado_actual == PEDIDO_ENTREGADO ? 'Entregado' : 'Pagado')))) %>
+</p>
+
+<%= link_to 'Edit', edit_item_pedido_path(@item_pedido) %> |
+<%= link_to 'Back', item_pedidos_path %>

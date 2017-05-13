@@ -1,0 +1,136 @@
+<strong>
+Restaurante: </strong> <%= @restaurante.nombre %> <br>
+<% if !@listum.nil? %>
+    <strong>
+Lista: </strong> <%= @listum.nombre %>
+    <% end %>
+
+<%= form_for(@pedido) do |f| %>
+  <% if @pedido.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pedido.errors.count, "error") %> prohibited this pedido from being saved:</h2>
+
+      <ul>
+      <% @pedido.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :restaurante_id, :value => @restaurante.id %>
+  </div>
+    <div class="field">
+      <%= f.hidden_field :pedido_id, :value => @pedido.id %>
+    </div>
+  <div class="field">
+    <%= f.label :fechahora_solicitada %><br>
+    <%= f.datetime_select :fechahora_solicitada %>
+  </div>
+  <div class="field">
+    <%= f.label :fechahora_estimada %><br>
+    <%= f.datetime_select :fechahora_estimada %>
+  </div>
+  <div class="field">
+    <%= f.label :Tarifa %><br>
+    <%= f.text_field :fee %>
+  </div>
+
+    <script>
+
+        function calcularTotal (){
+            var preciototal = 0;
+    <%
+      @items_lista.each do |itlist|
+        precio = ItemProveedor.find_by_proveedor_id_and_item_id(itlist.item.categorium.proveedor.id, itlist.item.id).precio
+    %>
+
+            preciototal += $('#item_cantidad' + <%= itlist.item.id %>).val() * <%= precio %>;
+
+        <%
+           end
+        %>
+            $('#preciototal').html(preciototal);
+        }
+    </script>
+    <% if @is_new %>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Valor unitario</th>
+        <th>Cantidad a ordenar</th>
+        <th>Subtotal</th>
+      </tr>
+        <% @items_lista.each do |itlist|
+             precio = ItemProveedor.find_by_proveedor_id_and_item_id(itlist.item.categorium.proveedor.id, itlist.item.id).precio %><tr>
+          <td> <%= itlist.item.nombre %> </td>
+          <td> <%= precio %> </td>
+          <td>
+            <input type="number" value="0" min="0" name="item_cantidad[<%= itlist.item.id %>]" id="item_cantidad<%= itlist.item.id %>"> </td>
+          <td>$<span id="precio<%= itlist.item.id %>">0</span></td>
+          </tr>
+            <script>
+                $('#item_cantidad' + <%= itlist.item.id %>).change(function(){
+                    console.log($(this).val());
+                    $('#precio' + <%= itlist.item.id %>).html($(this).val() * <%= precio %>);
+                    calcularTotal();
+                });
+            </script>
+        <%
+           end
+        %>
+      </table>
+        <% end %>
+
+    <strong>
+    Precio total:
+
+    $<span id="preciototal">0</span> </strong><br>
+    <div class="actions">
+    <%= f.submit "Guardar pedido" %><br>
+
+
+      <% if !@is_new %>
+      <h1>Cambiar estado del pedido</h1>
+
+      <form method="post" action="/update_estado_actual">
+        <%= token_tag %>
+        <% if current_user.rol == ADMIN%>
+            <select name="estado_actual">
+              <option disabled selected="selected">Seleccionar estado</option>
+              <option value="1" <% if @pedido.estado_actual == PEDIDO_SOLICITADO %>selected="selected"<% end %>>Pedido solicitado</option>
+              <option value="2" <% if @pedido.estado_actual == PEDIDO_ACEPTADO %>selected="selected"<% end %>>Pedido aceptado</option>
+              <option value="3" <% if @pedido.estado_actual == PEDIDO_RECOGIDO %>selected="selected"<% end %>>Pedido recogido</option>
+              <option value="4" <% if @pedido.estado_actual == PEDIDO_RECHAZADO %>selected="selected"<% end %>>Pedido rechazado</option>
+              <option value="5" <% if @pedido.estado_actual == PEDIDO_ENTREGADO %>selected="selected"<% end %>>Pedido entregado</option>
+              <option value="6" <% if @pedido.estado_actual == PEDIDO_PAGADO %>selected="selected"<% end %>>Pedido pagado</option>
+            </select>
+
+            <input type="hidden" name="pedido_id" value="<%= @pedido.id %>">
+
+            <input type="submit" value="Cambiar estado">
+        <% end %>
+        <% if current_user.rol == OPERARIO%>
+            <select name="estado_actual">
+              <option disabled selected="selected">Seleccionar estado</option>
+              <option value="2" <% if @pedido.estado_actual == PEDIDO_SOLICITADO %>selected="selected"<% end %>>Pedido aceptado</option>
+              <option value="3" <% if @pedido.estado_actual == PEDIDO_SOLICITADO %>selected="selected"<% end %>>Pedido recogido</option>
+              <option value="4" <% if @pedido.estado_actual == PEDIDO_SOLICITADO %>selected="selected"<% end %>>Pedido rechazado</option>
+              <option value="5" <% if @pedido.estado_actual == PEDIDO_SOLICITADO %>selected="selected"<% end %>>Pedido entregado</option>
+              <option value="6" <% if @pedido.estado_actual == PEDIDO_SOLICITADO %>selected="selected"<% end %>>Pedido pagado</option>
+            </select>
+
+            <input type="hidden" name="pedido_id" value="<%= @pedido.id %>">
+
+            <input type="submit" value="Cambiar estado">
+        <% end %>
+
+      </form>
+          <% end %>
+  </div>
+<% end %>
+<script>$(document).ready(function(){
+    console.log('hola mundo');
+});
+ </script>

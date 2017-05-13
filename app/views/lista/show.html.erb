@@ -1,0 +1,31 @@
+<h1>Visualizando: <%= @listum.nombre %></h1>
+<p id="notice"><%= notice %></p>
+<table border="1">
+  <tr>
+    <th>Nombre:</th>
+    <th>Restaurante</th>
+  </tr>
+  <tr>
+    <td><%= @listum.nombre %></td>
+    <td><%= @listum.restaurante.nombre %></td>
+  </tr>
+</table>
+
+<%
+   @items_lista.each do |itlist|
+    %><strong>Item:</strong> <%= Item.find(itlist.item_id).nombre %><br>
+<%
+   end
+%>
+<% if current_user.rol == ADMIN || current_user.rol == RESTAURANTE%>
+<form action="/pedidos/new" method="get">
+  <input type="hidden" name="listum_id" value="<%= @listum.id %>">
+  <input type="submit" value="Crear pedido con esta lista" />
+</form>
+    <% end %>
+
+<br>
+<br>
+
+<%= link_to 'Editar', edit_listum_path(@listum) %> |
+<%= link_to 'Volver', lista_path %>

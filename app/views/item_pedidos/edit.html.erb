@@ -1,0 +1,7 @@
+<h1>Editando <%= @item_pedido.nombre %> del <br><br>
+  pedido numero <%= @item_pedido.pedido_id %></h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Mostrar', @item_pedido %> |
+<%= link_to 'Volver', item_pedidos_path %>

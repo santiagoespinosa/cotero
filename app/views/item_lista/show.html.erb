@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @item_listum.item.nombre %>
+</p>
+
+<p>
+  <strong>Listum:</strong>
+  <%= @item_listum.listum.nombre %>
+</p>
+
+<%= link_to 'Edit', edit_item_listum_path(@item_listum) %> |
+<%= link_to 'Back', item_lista_path %>

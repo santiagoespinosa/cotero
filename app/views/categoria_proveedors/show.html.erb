@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Proveedor:</strong>
+  <%= @categoria_proveedor.proveedor.nombre %>
+</p>
+
+<p>
+  <strong>Categorium:</strong>
+  <%= @categoria_proveedor.categorium.nombre %>
+</p>
+
+<%= link_to 'Edit', edit_categoria_proveedor_path(@categoria_proveedor) %> |
+<%= link_to 'Back', categoria_proveedors_path %>

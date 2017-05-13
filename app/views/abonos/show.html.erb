@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Proveedor:</strong>
+  <%= @abono.proveedor %>
+</p>
+
+<p>
+  <strong>Pedido:</strong>
+  <%= @abono.pedido %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @abono.monto %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @abono.comentario %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @abono.user %>
+</p>
+
+<%= link_to 'Edit', edit_abono_path(@abono) %> |
+<%= link_to 'Back', abonos_path %>

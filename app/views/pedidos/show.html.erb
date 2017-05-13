@@ -1,0 +1,113 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Código pedido:</strong>
+  <%= @pedido.pedido_hash %>
+</p>
+
+<p>
+  <strong>Estado actual:</strong>
+  <%= @pedido.estado_actual == PEDIDO_SOLICITADO ? 'Solicitado' : (@pedido.estado_actual == PEDIDO_ACEPTADO ? 'Aceptado' :
+          (@pedido.estado_actual == PEDIDO_RECOGIDO ? 'Recogido' : (@pedido.estado_actual == PEDIDO_RECHAZADO ? 'Rechazado' :
+                  (@pedido.estado_actual == PEDIDO_ENTREGADO ? 'Entregado': 'Pagado' )))) %></p>
+
+<% if current_user.rol == ADMIN %>
+    <p>
+      <strong>Restaurante:</strong>
+      <%= @pedido.restaurante.nombre %>
+    </p>
+<% end %>
+
+<p>
+  <strong>Fechahora salida:</strong>
+  <%= @pedido.fechahora_solicitada %>
+</p>
+
+<p>
+  <strong>Fechahora estimada:</strong>
+  <%= @pedido.fechahora_estimada %>
+</p>
+
+<p>
+  <strong>Tarifa:</strong>
+  <%= @pedido.fee %>
+</p>
+
+<p>
+  <strong>Items del pedido:</strong><br>
+  <table border="1">
+    <tr>
+        <th>Item</th>
+        <th>Valor unitario</th>
+        <th>Proveedor</th>
+        <th>Cantidad</th>
+        <th>Estado del item</th>
+        <% if current_user.rol == ADMIN || current_user.rol == OPERARIO || current_user.rol == PROVEEDOR %> <th>Editar item</th> <% end %>
+
+    </tr>
+  <%
+     totalpedido = 0
+     @items_pedido.each do |itpedido|
+     totalpedido += itpedido.cantidad * itpedido.valor
+
+  %> <tr>
+        <td><%= itpedido.nombre %></td>
+        <td><%= itpedido.valor %></td>
+        <td><%= itpedido.proveedor.nombre %></td>
+        <td><%= itpedido.cantidad %></td>
+        <td><%= itpedido.estado_actual == ITEM_SOLICITADO ? 'Solicitado' : (itpedido.estado_actual == ITEM_ACEPTADO ? 'Aceptado' :
+                (itpedido.estado_actual == ITEM_RECOGIDO ? 'Recogido' : (itpedido.estado_actual == ITEM_RECHAZADO ? 'Rechazado' : (itpedido.estado_actual == ITEM_ENTREGADO ? 'Entregado' : 'Pagado')))) %></td>
+        <td><%= itpedido.disponible == true ? 'Disponible' : 'No disponible' %></td>
+        <% if current_user.rol == ADMIN || current_user.rol == OPERARIO || current_user.rol == PROVEEDOR %> <td><a href="/item_pedidos/<%= itpedido.id %>/edit">Editar item</a></td> <% end %>
+      </tr>
+  <%
+     end
+  %>
+</p>
+</table>
+
+<form method="post" action="/update_estado_actual">
+  <br>
+  <%= token_tag %>
+  <% if current_user.rol == ADMIN%>
+      <strong>Actualizar estado:</strong><br>
+      <select name="estado_actual">
+        <option value="1">Pedido solicitado</option>
+        <option value="2">Pedido aceptado</option>
+        <option value="3">Pedido recogido</option>
+        <option value="4">Pedido rechazado</option>
+        <option value="5">Pedido entregado</option>
+        <option value="6">Pedido pagado</option>
+      </select>
+
+      <input type="hidden" name="pedido_id" value="<%= @pedido.id %>">
+
+      <input type="submit" value="Cambiar estado">
+  <% end %>
+  <% if current_user.rol == OPERARIO%>
+      <strong>Actualizar estado:</strong><br>
+      <select name="estado_actual">
+        <option value="2">Pedido aceptado</option>
+        <option value="3">Pedido recogido</option>
+        <option value="4">Pedido rechazado</option>
+        <option value="5">Pedido entregado</option>
+        <option value="6">Pedido pagado</option>
+      </select>
+
+      <input type="hidden" name="pedido_id" value="<%= @pedido.id %>">
+
+      <input type="submit" value="Cambiar estado">
+  <% end %>
+
+</form>
+<p>
+  <strong>Total a pagar:</strong><br>
+  <%= totalpedido
+
+  %>
+  <%
+  %></p>
+
+
+<% if current_user.rol == ADMIN || current_user.rol == ADMIN %> <%= link_to 'Editar', edit_pedido_path(@pedido) %> |<% end %>
+<%= link_to 'Volver', pedidos_path %>

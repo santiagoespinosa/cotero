@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Abonos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Proveedor</th>
+      <th>Pedido</th>
+      <th>Monto</th>
+      <th>Comentario</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @abonos.each do |abono| %>
+      <tr>
+        <td><%= abono.proveedor %></td>
+        <td><%= abono.pedido %></td>
+        <td><%= abono.monto %></td>
+        <td><%= abono.comentario %></td>
+        <td><%= abono.user %></td>
+        <td><%= link_to 'Show', abono %></td>
+        <td><%= link_to 'Edit', edit_abono_path(abono) %></td>
+        <td><%= link_to 'Destroy', abono, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Abono', new_abono_path %>

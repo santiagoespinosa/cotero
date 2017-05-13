@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @item_proveedor.item.nombre %>
+</p>
+
+<p>
+  <strong>Proveedor:</strong>
+  <%= @item_proveedor.proveedor.user.email %>
+</p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= @item_proveedor.precio %>
+</p>
+
+<% if current_user.rol == ADMIN %>
+<%= link_to 'Editar', edit_item_proveedor_path(@item_proveedor) %> |
+    <% end %>
+<%= link_to 'Volver', item_proveedors_path %>

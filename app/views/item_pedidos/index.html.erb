@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Item Pedidos</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Valor</th>
+      <th>Disponible</th>
+      <th>Proveedor</th>
+      <th>Cantidad</th>
+      <th>Item</th>
+      <th>Estado actual</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_pedidos.each do |item_pedido| %>
+      <tr>
+        <td><%= item_pedido.nombre %></td>
+        <td><%= item_pedido.valor %></td>
+        <td><%= item_pedido.disponible %></td>
+        <td><%= item_pedido.proveedor.nombre %></td>
+        <td><%= item_pedido.cantidad %></td>
+        <td><%= item_pedido.item.nombre %></td>
+        <td><%= item_pedido.estado_actual %></td>
+        <td><%= link_to 'Show', item_pedido %></td>
+        <td><%= link_to 'Edit', edit_item_pedido_path(item_pedido) %></td>
+        <td><%= link_to 'Destroy', item_pedido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item pedido', new_item_pedido_path %>

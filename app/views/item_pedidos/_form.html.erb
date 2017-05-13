@@ -1,0 +1,50 @@
+<%= form_for(@item_pedido) do |f| %>
+  <% if @item_pedido.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item_pedido.errors.count, "error") %> prohibited this item_pedido from being saved:</h2>
+
+      <ul>
+      <% @item_pedido.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if current_user.rol == ADMIN || current_user.rol == OPERARIO %>
+  <div class="field">
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :cantidad %>
+  </div>
+        <% end %>
+
+  <% if current_user.rol == PROVEEDOR %>
+    <div class="field">
+    <%= f.label :disponible %><br>
+    <%= f.check_box :disponible %>
+  </div>
+    <% end %>
+
+  <% if current_user.rol == ADMIN || current_user.rol == OPERARIO %>
+    <div class="field">
+      <%= f.label :proveedor %><br>
+      <%= f.select :proveedor_id, options_for_select(@c_proveedors.map{ |c| [c.proveedor.nombre, c.proveedor_id, {'data-id'=>@item_pedido.proveedor_id}] })  %>
+    </div>
+  <% end %>
+
+      <% if current_user.rol == ADMIN || current_user.rol == OPERARIO %>
+        <div class="field">
+        <%= f.label :estado_actual %><br>
+        <select name="item_pedido[estado_actual]">
+            <option value="1" <% if @item_pedido.estado_actual == ITEM_SOLICITADO %>selected="selected"<% end %>>Item solicitado</option>
+            <option value="2" <% if @item_pedido.estado_actual == ITEM_ACEPTADO %>selected="selected"<% end %>>Item aceptado</option>
+            <option value="3" <% if @item_pedido.estado_actual == ITEM_RECOGIDO %>selected="selected"<% end %>>Item recogido</option>
+            <option value="4" <% if @item_pedido.estado_actual == ITEM_RECHAZADO %>selected="selected"<% end %>>Item rechazado</option>
+            <option value="5" <% if @item_pedido.estado_actual == ITEM_ENTREGADO %>selected="selected"<% end %>>Item entregado</option>
+            <option value="6" <% if @item_pedido.estado_actual == ITEM_PAGADO %>selected="selected"<% end %>>Item pagado</option>
+          </select>
+        </div>
+    <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

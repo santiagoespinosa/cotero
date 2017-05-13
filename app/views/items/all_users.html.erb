@@ -1,0 +1,24 @@
+<h1>Usuarios</h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Email</th>
+    <th>Celular</th>
+    <th>Rol</th>
+    <% if current_user.rol == ADMIN %><th></th> <% end %>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @usuarios.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.celular %></td>
+        <td><%= user.rol == RESTAURANTE ? 'Restaurante' : (user.rol == ADMIN ? 'Administrador' : (user.rol == PROVEEDOR ? 'Proveedor' : 'Operario' )) %></td>
+        <% if current_user.rol == ADMIN %><td><a href="/change_password?user_id=<%= user.id %>" >Actualizar usuario</a></td> <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

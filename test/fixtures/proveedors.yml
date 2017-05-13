@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  user_id: 
+  saldo: 1.5
+  cuanto_tarda: 1.5
+
+two:
+  nombre: MyString
+  user_id: 
+  saldo: 1.5
+  cuanto_tarda: 1.5

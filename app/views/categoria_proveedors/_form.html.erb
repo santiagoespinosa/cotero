@@ -1,0 +1,25 @@
+<%= form_for(@categoria_proveedor) do |f| %>
+  <% if @categoria_proveedor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@categoria_proveedor.errors.count, "error") %> prohibited this categoria_proveedor from being saved:</h2>
+
+      <ul>
+      <% @categoria_proveedor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :proveedor_id %><br>
+    <%= f.select :proveedor_id, options_for_select(@proveedors.map{ |c| [c.nombre, c.id, {'data-id'=>c.id}] }) %>
+  </div>
+  <div class="field">
+    <%= f.label :categorium_id %><br>
+    <%= f.select :categorium_id, options_for_select(@categoria.map{ |c| [c.nombre, c.id, {'data-id'=>c.id}] }) %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Crear proveedor de categoría"%>
+  </div>
+<% end %>

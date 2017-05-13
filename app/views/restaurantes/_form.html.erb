@@ -1,0 +1,25 @@
+<%= form_for(@restaurante) do |f| %>
+  <% if @restaurante.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@restaurante.errors.count, "error") %> prohibited this restaurante from being saved:</h2>
+
+      <ul>
+      <% @restaurante.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <strong><%= f.label :nombre %></strong><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <strong><%= f.label :usuario %></strong><br>
+    <%= f.select :user_id, options_for_select(@restaurantes.map{ |c| [c.email, c.id, {'data-id'=>c.id}] },(@restaurante.user_id)) %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Crear restaurante"%>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  memo: MyText
+  pedido_id: 
+  from_id: 1
+  to_id: 1
+
+two:
+  memo: MyText
+  pedido_id: 
+  from_id: 1
+  to_id: 1

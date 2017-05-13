@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>El cotero®</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script src="/js/jquery.3.2.1.js"></script>
+</head>
+<body>
+
+<% if user_signed_in?
+  role = current_user.rol %>
+<h1 aligned = "middle"> EL COTERO ® </h1>
+    <a href="/user_info">Perfil</a>|
+    <% if role == ADMIN  || role == OPERARIO %><a href="/all_users">Ver usuarios</a> | <% end %>
+    <% if role == ADMIN %><a href="/new_user">Nuevo usuario</a> | <% end %>
+    <% if role == ADMIN || role == RESTAURANTE %><a href="/categoria">Categorias</a> |<% end %>
+    <a href="/items">Items</a> |
+    <% if role == ADMIN || role == OPERARIO %><a href="/proveedors">Proveedores</a> | <% end %>
+    <% if role == ADMIN || role == PROVEEDOR || role == OPERARIO%><a href="/item_proveedors">Proveedores de items</a> |<% end %>
+    <% if role == ADMIN || role == OPERARIO%><a href="/restaurantes">Restaurantes</a> | <% end %>
+    <% if role == ADMIN || role == RESTAURANTE %><a href="/lista">Listas</a> | <% end %>
+    <a href="/pedidos">Pedidos</a> | <br>
+    <a href="/categoria_proveedors">Proveers X categ</a> | <br>
+    <a href="/users/sign_out" data-method="delete" rel="nofollow">Cerrar sesión como: <span class="logueado">[<%= current_user.email %>]</span></a>
+<% end %>
+<%= yield %>
+
+</body>
+
+<footer align="middle">
+  <p>El Cotero ®</p>
+  <p>Realizado por: <a href="andrescastillo.com">
+    Castle programming</a>.</p>
+  <p>Información: <a href="mailto:castle@example.com">
+    Castle@ejemplo.com</a>.</p>
+</footer>
+</html>

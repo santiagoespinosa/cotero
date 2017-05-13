@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @item.nombre %>
+</p>
+
+<p>
+  <strong>Categoría:</strong>
+  <%= @item.categorium.nombre %>
+</p>
+
+<% if current_user.rol == ADMIN %>
+<%= link_to 'Editar', edit_item_path(@item) %> |
+<% end %>
+<%= link_to 'Volver', items_path %>
+
