@@ -13,7 +13,7 @@ development:
    adapter: postgresql
    username: postgres
    database: elcotero
-   password: cami1235
+   password: santi.92
    host: localhost
    pool: 5
   #<<: *default
